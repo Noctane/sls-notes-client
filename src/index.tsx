@@ -7,7 +7,6 @@ import './assets/styles/tailwind.output.css';
 import reportWebVitals from './reportWebVitals';
 // AWS Amplify config
 import config from './config';
-import { getConfigFileParsingDiagnostics } from 'typescript';
 
 Amplify.configure({
   Auth: {
