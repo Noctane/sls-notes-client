@@ -3,6 +3,7 @@ import Router from './Router';
 import { Auth } from 'aws-amplify';
 // Components
 import Header from './components/Header';
+import PuffLoader from 'react-spinners/PuffLoader';
 // Lib
 import { useAuth } from './lib/AuthContext';
 import { onError } from './lib/errorHandler';
@@ -29,7 +30,13 @@ function App() {
   return (
     <>
       <Header />
-      {!isAuthenticating && <Router />}
+      {!isAuthenticating ? (
+        <Router />
+      ) : (
+        <div className="flex justify-center pt-48 items-center">
+          <PuffLoader color="#5a67d8" />
+        </div>
+      )}
     </>
   );
 }

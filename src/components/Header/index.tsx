@@ -20,7 +20,7 @@ export default function Header() {
     <div className="container mx-auto border-b border-gray-300 py-6 flex justify-between">
       <div className="brand">
         <Link to="/">
-          <h1 className="text-xl font-bold text-indigo-600">Note App</h1>
+          <h1 className="text-xl font-bold text-indigo-600">Notes App</h1>
         </Link>
       </div>
       <div className="space-x-6">
