@@ -7,6 +7,8 @@ import './assets/styles/tailwind.output.css';
 import reportWebVitals from './reportWebVitals';
 // AWS Amplify config
 import config from './config';
+// Context
+import { AuthProvider } from './lib/AuthContext';
 
 Amplify.configure({
   Auth: {
@@ -34,9 +36,11 @@ Amplify.configure({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <App />
+      </Router>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

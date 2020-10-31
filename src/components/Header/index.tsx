@@ -1,9 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
+import { Link, useHistory } from 'react-router-dom';
+// Lib
+import { useAuth } from '../../lib/AuthContext';
 // Components
 import UserMenuLink from './UserMenuLink';
 
 export default function Header() {
+  const history = useHistory();
+  const { isAuthenticated, setIsAuthenticated } = useAuth()!;
+
+  async function handleLogout() {
+    await Auth.signOut();
+    setIsAuthenticated(false);
+    history.push('/login');
+  }
+
   return (
     <div className="container mx-auto border-b border-gray-300 py-6 flex justify-between">
       <div className="brand">
@@ -12,8 +24,14 @@ export default function Header() {
         </Link>
       </div>
       <div className="space-x-6">
-        <UserMenuLink to="/login" label="Login" />
-        <UserMenuLink to="/signup" label="Sign up" full />
+        {isAuthenticated ? (
+          <UserMenuLink onClick={handleLogout} label="Logout" />
+        ) : (
+          <>
+            <UserMenuLink to="/login" label="Login" />
+            <UserMenuLink to="/signup" label="Sign up" full />
+          </>
+        )}
       </div>
     </div>
   );
