@@ -6,7 +6,7 @@ interface FormFieldProps {
   autofocus?: boolean;
   labelMessage: string;
   name: string;
-  type: 'email' | 'text' | 'date' | 'textarea' | 'file' | 'password';
+  type: 'email' | 'text' | 'date' | 'textarea' | 'file' | 'password' | 'tel';
   placeholder?: string;
   isRequired?: boolean;
   onChange?: (
