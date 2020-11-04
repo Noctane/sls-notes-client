@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 // Hooks
-import useForm from '../hooks/useForm';
+import useForm from '../../hooks/useForm';
 // Lib
-import validate from '../lib/validationRules';
-import { useAuth } from '../lib/AuthContext';
-import { onError } from '../lib/errorHandler';
+import validate from '../../lib/validationRules';
+import { useAuth } from '../../lib/AuthContext';
+import { onError } from '../../lib/errorHandler';
 // Components
 import { Link } from 'react-router-dom';
-import FormField from '../components/FormField';
-import Button from '../components/Button';
+import FormField from '../../components/FormField';
+import Button from '../../components/Button';
 
 interface ICredentials {
   email: string;
