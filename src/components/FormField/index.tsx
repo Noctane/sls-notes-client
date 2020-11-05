@@ -9,6 +9,7 @@ interface FormFieldProps {
   type: 'email' | 'text' | 'date' | 'textarea' | 'file' | 'password' | 'tel';
   placeholder?: string;
   isRequired?: boolean;
+  onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (
     event:
       | React.ChangeEvent<HTMLInputElement>
@@ -16,8 +17,9 @@ interface FormFieldProps {
   ) => void;
   onBlur: () => void;
   onFocus: () => void;
-  value: string | number;
+  value?: string | number;
   errors: ErrorsType;
+  inputRef?: any;
 }
 
 function FormField({
@@ -29,15 +31,17 @@ function FormField({
   className,
   isRequired,
   onChange,
+  onFileChange,
   onBlur,
   onFocus,
   value,
   errors,
+  inputRef,
 }: FormFieldProps) {
-  return (
-    <div className={className}>
-      <Label htmlFor={name}>{labelMessage}</Label>
-      {type === 'textarea' ? (
+  if (type === 'textarea') {
+    return (
+      <div className={className}>
+        <Label htmlFor={name}>{labelMessage}</Label>
         <TextArea
           name={name}
           placeholder={placeholder}
@@ -47,7 +51,32 @@ function FormField({
           required={isRequired}
           value={value}
         />
-      ) : (
+        {errors.hasOwnProperty(name) && <ErrorSpan>{errors[name]}</ErrorSpan>}
+      </div>
+    );
+  } else if (type === 'file') {
+    return (
+      <div className={className}>
+        <Label htmlFor={name}>{labelMessage}</Label>
+        <Input
+          autoFocus={autofocus}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          onChange={onFileChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          required={isRequired}
+          ref={inputRef}
+        />
+
+        {errors.hasOwnProperty(name) && <ErrorSpan>{errors[name]}</ErrorSpan>}
+      </div>
+    );
+  } else {
+    return (
+      <div className={className}>
+        <Label htmlFor={name}>{labelMessage}</Label>
         <Input
           autoFocus={autofocus}
           name={name}
@@ -59,10 +88,10 @@ function FormField({
           required={isRequired}
           value={value}
         />
-      )}
-      {errors.hasOwnProperty(name) && <ErrorSpan>{errors[name]}</ErrorSpan>}
-    </div>
-  );
+        {errors.hasOwnProperty(name) && <ErrorSpan>{errors[name]}</ErrorSpan>}
+      </div>
+    );
+  }
 }
 
 export default FormField;

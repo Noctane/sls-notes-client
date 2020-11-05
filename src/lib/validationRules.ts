@@ -35,6 +35,10 @@ export default function validate<T extends IValues>(values: T): ErrorsType {
   if (values.hasOwnProperty('confirmationCode') && !values.confirmationCode) {
     errors.confirmationCode = genericRequiredMsg;
   }
+  // note content
+  if (values.hasOwnProperty('content') && !values.content) {
+    errors.content = genericRequiredMsg;
+  }
 
   return errors;
 }

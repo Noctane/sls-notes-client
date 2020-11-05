@@ -1,11 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default {
+  MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
     REGION: 'eu-west-3',
     BUCKET: 'rndprt-notes',
   },
   apiGateway: {
-    REGION: 'Yeu-west-2',
+    REGION: 'eu-west-2',
     URL: 'https://93onijaqel.execute-api.eu-west-2.amazonaws.com/prod',
   },
   cognito: {

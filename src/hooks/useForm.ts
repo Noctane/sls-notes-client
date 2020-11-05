@@ -31,22 +31,16 @@ function useForm(callback: TCallBack, validate: TValidate, initialValues: any) {
     setErrors({});
   };
 
-  const handleImageChange = (
-    event:
-      | React.FormEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    event.persist();
-    const { name, files } = event.target as HTMLInputElement;
-    let photo: any;
-    if (files) {
-      photo = files[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = e.target as HTMLInputElement;
+    if (files && files.length > 0) {
+      setValues((val: any) => ({
+        ...val,
+        [name]: files[0],
+      }));
     }
-    setValues((val: any) => ({
-      ...val,
-      [name]: photo,
-    }));
   };
+  console.log(values);
 
   const handleChange = (
     event:
@@ -69,7 +63,7 @@ function useForm(callback: TCallBack, validate: TValidate, initialValues: any) {
 
   return {
     handlers: {
-      handleImageChange,
+      handleFileChange,
       handleChange,
       handleSubmit,
       handleBlur,

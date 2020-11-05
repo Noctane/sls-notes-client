@@ -28,6 +28,9 @@ export default function ConfirmationCodeForm({
     <>
       <h1 className="text-3xl font-medium text-gray-700">Confirmation code</h1>
       <div className="rounded border w-2/5 p-8 text-left mx-auto mt-8">
+        <div className="text-center">
+          Check your email for the confirmation code
+        </div>
         <form onSubmit={handlers.handleSubmit} className="space-y-6">
           <FormField
             autofocus
@@ -41,9 +44,6 @@ export default function ConfirmationCodeForm({
             value={values.confirmationCode}
             errors={errors}
           />
-          <div className="text-center">
-            Check your email for the confirmation code
-          </div>
           <Button
             type="submit"
             disabled={Object.keys(errors).length > 0 || busy}

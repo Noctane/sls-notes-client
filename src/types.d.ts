@@ -3,6 +3,11 @@ interface IUser {
   password: string;
 }
 
+interface INote {
+  content: string;
+  attachment?: File | null;
+}
+
 type ErrorsType = {
   [key: string]: string;
 };

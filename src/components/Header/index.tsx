@@ -17,7 +17,7 @@ export default function Header() {
   }
 
   return (
-    <div className="container mx-auto border-b border-gray-300 py-6 flex justify-between">
+    <div className="container mx-auto border-b border-gray-300 py-6 flex justify-between items-center">
       <div className="brand">
         <Link to="/">
           <h1 className="text-xl font-bold text-indigo-600">Notes App</h1>
