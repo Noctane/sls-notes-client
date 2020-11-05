@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 // hooks
 import useForm from '../../hooks/useForm';
 // lib
+import { s3Upload } from '../../lib/aws';
 import validate from '../../lib/validationRules';
 // components
 import FormField from '../../components/FormField';
@@ -28,7 +29,10 @@ export default function NewNote() {
   }
 
   const handleSubmit = async () => {
-    if (values.file && values.file.size > config.MAX_ATTACHMENT_SIZE) {
+    if (
+      values.attachment &&
+      values.attachment.size > config.MAX_ATTACHMENT_SIZE
+    ) {
       alert(
         `File too large, it must be smaller than ${
           config.MAX_ATTACHMENT_SIZE / 1000000
@@ -39,7 +43,11 @@ export default function NewNote() {
     setIsLoading(true);
 
     try {
-      await createNote({ content: values.content });
+      const attachmentFile = values.attachment
+        ? await s3Upload(values.attachment)
+        : null;
+
+      await createNote({ content: values.content, attachment: attachmentFile });
       history.push('/');
     } catch (e) {
       onError(e);
