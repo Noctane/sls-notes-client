@@ -3,9 +3,15 @@ interface IUser {
   password: string;
 }
 
-interface INote {
+interface INewNote {
   content: string;
   attachment?: File | null;
+}
+interface INote {
+  content: string;
+  createdAt: number;
+  noteId: string;
+  userId: string;
 }
 
 type ErrorsType = {

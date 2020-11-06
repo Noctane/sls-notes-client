@@ -17,12 +17,12 @@ export default function NewNote() {
   const fileInput = useRef<File | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const initialValues: INote = {
+  const initialValues: INewNote = {
     content: '',
     attachment: null,
   };
   // tmp note type
-  function createNote(note: INote) {
+  function createNote(note: INewNote) {
     return API.post('notes', '/notes', {
       body: note,
     });
